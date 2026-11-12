@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ventas Starbucks México</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+  /* Reporte para Dirección: hoja blanca, columna de lectura de 72rem, cifras tabulares. */
+  :root {
+    --bg: #ffffff; --fg: #1f1e1d; --muted: #6d6b67; --line: #e4e2dc; --panel: #fafaf8;
+    --core: #2a78d6; --temp: #eb6834; --good: #006300; --bad: #8e2626;
+    --sans: Inter, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); }
+  body { font: 15px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+  .pg { max-width: 72rem; margin: 0 auto; padding-block: 40px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 40px; }
+  .head { display: grid; gap: 10px; }
+  .eyebrow { margin: 0; font-size: 12px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+  h1 { margin: 0; font: 400 clamp(1.7rem, 4vw, 2.4rem)/1.15 var(--serif); text-wrap: balance; }
+  .lede { margin: 0; max-width: 66ch; font-size: 16px; line-height: 1.65; }
+  .lede b, .num { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .meta { margin: 0; font-size: 12.5px; color: var(--muted); }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 14px; }
+  .tile { display: grid; gap: 6px; align-content: start; min-width: 0; padding: 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+  .tile-label { font-size: 12.5px; color: var(--muted); }
+  .big { font: 400 2.3rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+  .chg { font-size: 12.5px; color: var(--muted); }
+  .chg b { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .up { color: var(--good); } .down { color: var(--bad); }
+  section { display: grid; gap: 12px; min-width: 0; }
+  h2 { margin: 0; font-size: 18px; font-weight: 600; text-wrap: balance; }
+  .note { margin: 0; max-width: 66ch; font-size: 12.5px; color: var(--muted); }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12.5px; color: var(--muted); }
+  .key { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 12px; height: 12px; border-radius: 2px; }
+  .sw.core, .seg.core { background: var(--core); }
+  .sw.temp, .seg.temp { background: var(--temp); }
+  .barras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; padding-top: 4px; }
+  .barras .area { height: 240px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 6px; border-bottom: 1px solid #c9c7c0; }
+  .barras.chica .area { height: 180px; }
+  .barras .val { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .barras .pila { width: min(72%, 96px); display: flex; flex-direction: column; border-radius: 3px 3px 0 0; overflow: hidden; min-height: 2px; }
+  .barras .seg { width: 100%; }
+  .barras .parcial .seg { opacity: .5; }
+  .anio { display: block; padding-top: 6px; text-align: center; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .col { min-width: 0; }
+  .duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 28px; }
+  figure { margin: 0; display: grid; gap: 8px; min-width: 0; }
+  figcaption { font-size: 12.5px; color: var(--muted); }
+  .scroll { overflow-x: auto; min-width: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+  th { padding: 6px 10px; text-align: right; vertical-align: bottom; white-space: nowrap; font-size: 12px; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--line); }
+  td { padding: 7px 10px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child, .txt { text-align: left; }
+  .grp { border-left: 1px solid var(--line); }
+  .tot { font-weight: 600; }
+  .foot { margin: 0; font-size: 12px; color: var(--muted); }
+  details { padding-top: 16px; border-top: 1px solid var(--line); }
+  summary { cursor: pointer; font-weight: 600; }
+  summary:focus-visible { outline: 2px solid var(--core); outline-offset: 3px; }
+  .det { display: grid; gap: 16px; padding-top: 14px; }
+  .lista { margin: 0; padding-left: 1.2rem; display: grid; gap: 6px; max-width: 70ch; }
+  @media (max-width: 480px) { .barras .val { font-size: 11.5px; } .barras .area { height: 200px; } .barras.chica .area { height: 160px; } }
+</style>
+</head>
+<body>
+<main class="pg">
+  <header class="head" id="resumen">
+    <p class="eyebrow">Análisis para Dirección · DEVIART</p>
+    <h1>Ventas de vasos a Starbucks México, 2023 a 2026</h1>
+    <p class="lede">De enero a octubre de 2026 vendimos <b>$7,958,000</b> en vasos a Starbucks México, <b class="down">-31%</b> frente al mismo periodo de 2025 (<b>$11,531,128</b>). El vaso Core baja desde 2023: pasó de <b>1,110</b> cajas en 2023 a <b>250</b> en lo que va de 2026. Los proyectos de temporada crecieron hasta 2025 y en 2026 van <b class="down">-30%</b> en cajas contra enero a octubre de 2025.</p>
+    <p class="meta">Importes sin IVA · Datos al 11 de noviembre de 2026</p>
+  </header>
+
+  <div class="tiles" id="indicadores">
+    <div class="tile"><span class="tile-label">Ventas totales · enero a octubre 2026</span><span class="big">$7,958,000</span><span class="chg"><b class="down">-31%</b> vs. enero a octubre 2025</span></div>
+    <div class="tile"><span class="tile-label">Vaso Core · cajas enero a octubre 2026</span><span class="big">250</span><span class="chg"><b class="down">-17%</b> vs. enero a octubre 2025</span></div>
+    <div class="tile"><span class="tile-label">Proyectos y temporada · cajas enero a octubre 2026</span><span class="big">8,343</span><span class="chg"><b class="down">-30%</b> vs. enero a octubre 2025</span></div>
+  </div>
+
+  <section id="ventas-por-anio">
+    <h2>Ventas por año, sin IVA</h2>
+    <p class="note">Años completos. 2026 llega hasta la última factura, del 26 de octubre de 2026, por eso su barra va más clara.</p>
+    <div class="legend"><span class="key"><span class="sw core"></span>Vaso Core</span><span class="key"><span class="sw temp"></span>Proyectos y temporada</span></div>
+    <div class="barras" role="img" aria-label="Ventas sin IVA por año, Core y temporada. 2023: $4,197,337; 2024: $8,667,121; 2025: $13,674,946; 2026: $7,958,000">
+      <div class="col" title="2023: Core $2,616,150, temporada $1,581,187, total $4,197,337">
+        <div class="area"><span class="val">$4.2 M</span>
+          <div class="pila" style="height:30.69%"><div class="seg temp" style="height:37.67%"></div><div class="seg core" style="height:62.33%"></div></div>
+        </div>
+        <span class="anio">2023</span>
+      </div>
+      <div class="col" title="2024: Core $1,527,750, temporada $7,139,371, total $8,667,121">
+        <div class="area"><span class="val">$8.7 M</span>
+          <div class="pila" style="height:63.38%"><div class="seg temp" style="height:82.37%"></div><div class="seg core" style="height:17.63%"></div></div>
+        </div>
+        <span class="anio">2024</span>
+      </div>
+      <div class="col" title="2025: Core $1,236,750, temporada $12,438,196, total $13,674,946">
+        <div class="area"><span class="val">$13.7 M</span>
+          <div class="pila" style="height:100.00%"><div class="seg temp" style="height:90.96%"></div><div class="seg core" style="height:9.04%"></div></div>
+        </div>
+        <span class="anio">2025</span>
+      </div>
+      <div class="col parcial" title="2026 (hasta la última factura): Core $626,172, temporada $7,331,828, total $7,958,000">
+        <div class="area"><span class="val">$8.0 M</span>
+          <div class="pila" style="height:58.19%"><div class="seg temp" style="height:92.13%"></div><div class="seg core" style="height:7.87%"></div></div>
+        </div>
+        <span class="anio">2026*</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="cajas-por-anio">
+    <h2>Cajas vendidas por año</h2>
+    <p class="note">Cada gráfica tiene su propia escala: una caja Core trae 216 vasos y una de temporada, 52.</p>
+    <div class="duo">
+      <figure>
+        <figcaption>Vaso Core · caja de 216 piezas</figcaption>
+      <div class="barras chica" role="img" aria-label="Cajas de vaso Core por año. 2023: 1,110; 2024: 630; 2025: 510; 2026: 250">
+        <div class="col" title="2023: 1,110 cajas, $2,616,150">
+          <div class="area"><span class="val">1,110</span><div class="pila" style="height:100.00%"><div class="seg core" style="height:100%"></div></div></div>
+          <span class="anio">2023</span>
+        </div>
+        <div class="col" title="2024: 630 cajas, $1,527,750">
+          <div class="area"><span class="val">630</span><div class="pila" style="height:56.76%"><div class="seg core" style="height:100%"></div></div></div>
+          <span class="anio">2024</span>
+        </div>
+        <div class="col" title="2025: 510 cajas, $1,236,750">
+          <div class="area"><span class="val">510</span><div class="pila" style="height:45.95%"><div class="seg core" style="height:100%"></div></div></div>
+          <span class="anio">2025</span>
+        </div>
+        <div class="col parcial" title="2026: 250 cajas, $626,172">
+          <div class="area"><span class="val">250</span><div class="pila" style="height:22.52%"><div class="seg core" style="height:100%"></div></div></div>
+          <span class="anio">2026*</span>
+        </div>
+      </div>
+      </figure>
+      <figure>
+        <figcaption>Proyectos y temporada · caja de 52 piezas</figcaption>
+      <div class="barras chica" role="img" aria-label="Cajas de proyectos y temporada por año. 2023: 1,923; 2024: 8,124; 2025: 13,737; 2026: 8,343">
+        <div class="col" title="2023: 1,923 cajas, $1,581,187">
+          <div class="area"><span class="val">1,923</span><div class="pila" style="height:14.00%"><div class="seg temp" style="height:100%"></div></div></div>
+          <span class="anio">2023</span>
+        </div>
+        <div class="col" title="2024: 8,124 cajas, $7,139,371">
+          <div class="area"><span class="val">8,124</span><div class="pila" style="height:59.14%"><div class="seg temp" style="height:100%"></div></div></div>
+          <span class="anio">2024</span>
+        </div>
+        <div class="col" title="2025: 13,737 cajas, $12,438,196">
+          <div class="area"><span class="val">13,737</span><div class="pila" style="height:100.00%"><div class="seg temp" style="height:100%"></div></div></div>
+          <span class="anio">2025</span>
+        </div>
+        <div class="col parcial" title="2026: 8,343 cajas, $7,331,828">
+          <div class="area"><span class="val">8,343</span><div class="pila" style="height:60.73%"><div class="seg temp" style="height:100%"></div></div></div>
+          <span class="anio">2026*</span>
+        </div>
+      </div>
+      </figure>
+    </div>
+  </section>
+
+  <section id="comparativo-anual">
+    <h2>Comparativo anual</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Año</th><th class="grp">Core<br>cajas</th><th>Core<br>ventas</th><th class="grp">Temporada<br>cajas</th><th>Temporada<br>ventas</th><th class="grp">Total<br>cajas</th><th>Total<br>ventas</th></tr></thead>
+        <tbody>
+            <tr><td>2023</td><td class="grp">1,110</td><td>$2,616,150</td><td class="grp">1,923</td><td>$1,581,187</td><td class="grp tot">3,033</td><td class="tot">$4,197,337</td></tr>
+            <tr><td>2024</td><td class="grp">630</td><td>$1,527,750</td><td class="grp">8,124</td><td>$7,139,371</td><td class="grp tot">8,754</td><td class="tot">$8,667,121</td></tr>
+            <tr><td>2025</td><td class="grp">510</td><td>$1,236,750</td><td class="grp">13,737</td><td>$12,438,196</td><td class="grp tot">14,247</td><td class="tot">$13,674,946</td></tr>
+            <tr><td>2026*</td><td class="grp">250</td><td>$626,172</td><td class="grp">8,343</td><td>$7,331,828</td><td class="grp tot">8,593</td><td class="tot">$7,958,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="foot">* 2026 hasta el 26 de octubre de 2026. Ventas sin IVA, en pesos.</p>
+  </section>
+
+  <section id="enero-octubre">
+    <h2>Mismo periodo: enero a octubre de cada año</h2>
+    <p class="note">Compara 2026 con los años anteriores sin el efecto de noviembre y diciembre.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Año</th><th class="grp">Core<br>cajas</th><th>Core<br>ventas</th><th class="grp">Temporada<br>cajas</th><th>Temporada<br>ventas</th><th class="grp">Total<br>cajas</th><th>Total<br>ventas</th><th class="grp">Ventas vs.<br>año anterior</th></tr></thead>
+        <tbody>
+            <tr><td>2023</td><td class="grp">1,110</td><td>$2,616,150</td><td class="grp">1,923</td><td>$1,581,187</td><td class="grp tot">3,033</td><td class="tot">$4,197,337</td><td class="grp">—</td></tr>
+            <tr><td>2024</td><td class="grp">630</td><td>$1,527,750</td><td class="grp">5,550</td><td>$4,877,340</td><td class="grp tot">6,180</td><td class="tot">$6,405,090</td><td class="grp up">+53%</td></tr>
+            <tr><td>2025</td><td class="grp">300</td><td>$727,500</td><td class="grp">11,877</td><td>$10,803,628</td><td class="grp tot">12,177</td><td class="tot">$11,531,128</td><td class="grp up">+80%</td></tr>
+            <tr><td>2026</td><td class="grp">250</td><td>$626,172</td><td class="grp">8,343</td><td>$7,331,828</td><td class="grp tot">8,593</td><td class="tot">$7,958,000</td><td class="grp down">-31%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <details id="notas">
+    <summary>Qué incluye el análisis y detalle por empaque</summary>
+    <div class="det">
+      <ul class="lista">
+        <li>Solo vasos vendidos a Starbucks México: facturas a Distribuidora e Importadora Alsea con marca Starbucks. No incluye Italianni's, Chili's, Cheesecake Factory ni Starbucks Internacional.</li>
+        <li><b>Vaso Core:</b> todo lo que va en caja de 216 piezas: el vaso reusable de línea de 16 oz y, en 2026, un evento de graduación.</li>
+        <li><b>Proyectos y temporada:</b> vasos para campañas (promociones, Rewards, Mundial y Zona Maco) en caja de 52 piezas. En 2025 también hubo vasos de 24 oz en caja de 48, que cuentan aquí.</li>
+        <li>Importes sin IVA, como se facturaron, antes de las notas de crédito que aplica ALSEA.</li>
+        <li>Fuente: reporte de facturación GENERAL ALSEA de Administración, 52 facturas del 16 de enero de 2023 al 26 de octubre de 2026.</li>
+      </ul>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Año</th><th class="txt">Categoría</th><th class="txt">Empaque</th><th>Cajas</th><th>Piezas</th><th>Ventas</th><th>Precio promedio<br>por caja</th></tr></thead>
+          <tbody>
+            <tr><td>2023</td><td class="txt">Core</td><td class="txt">Caja de 216 · 16 oz</td><td>1,110</td><td>239,760</td><td>$2,616,150</td><td>$2,356.89</td></tr>
+            <tr><td>2023</td><td class="txt">Proyectos y temporada</td><td class="txt">Caja de 52 · 16 oz</td><td>1,923</td><td>99,996</td><td>$1,581,187</td><td>$822.25</td></tr>
+            <tr><td>2024</td><td class="txt">Core</td><td class="txt">Caja de 216 · 16 oz</td><td>630</td><td>136,080</td><td>$1,527,750</td><td>$2,425.00</td></tr>
+            <tr><td>2024</td><td class="txt">Proyectos y temporada</td><td class="txt">Caja de 52 · 16 oz</td><td>8,124</td><td>422,448</td><td>$7,139,371</td><td>$878.80</td></tr>
+            <tr><td>2025</td><td class="txt">Core</td><td class="txt">Caja de 216 · 16 oz</td><td>510</td><td>110,160</td><td>$1,236,750</td><td>$2,425.00</td></tr>
+            <tr><td>2025</td><td class="txt">Proyectos y temporada</td><td class="txt">Caja de 52 · 16 oz</td><td>11,623</td><td>604,396</td><td>$10,560,964</td><td>$908.63</td></tr>
+            <tr><td>2025</td><td class="txt">Proyectos y temporada</td><td class="txt">Caja de 48 · 24 oz</td><td>2,114</td><td>101,472</td><td>$1,877,232</td><td>$888.00</td></tr>
+            <tr><td>2026</td><td class="txt">Core</td><td class="txt">Caja de 216 · 16 oz</td><td>240</td><td>51,840</td><td>$582,000</td><td>$2,425.00</td></tr>
+            <tr><td>2026</td><td class="txt">Core</td><td class="txt">Caja de 216 · evento</td><td>10</td><td>2,160</td><td>$44,172</td><td>$4,417.20</td></tr>
+            <tr><td>2026</td><td class="txt">Proyectos y temporada</td><td class="txt">Caja de 52 · 16 oz</td><td>8,343</td><td>433,836</td><td>$7,331,828</td><td>$878.80</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+</main>
+</body>
+</html>

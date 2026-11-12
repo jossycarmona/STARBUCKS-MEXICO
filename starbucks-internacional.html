@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ventas Starbucks Internacional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+  /* Ventas ALSEA por marca: hoja blanca, pestañas fijas arriba, columna de 72rem, cifras tabulares. */
+  :root {
+    --bg: #ffffff; --fg: #1f1e1d; --muted: #6d6b67; --line: #e4e2dc; --panel: #fafaf8;
+    --good: #006300; --bad: #8e2626;
+    --sans: Inter, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); }
+  body { font: 15px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+  .tabs { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .tabs-in { max-width: 72rem; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+  .tabs-in::-webkit-scrollbar { display: none; }
+  .tab { flex: 0 0 auto; padding: 14px 12px 12px; font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+  .tab:hover { color: var(--fg); }
+  .tab:focus-visible { outline: 2px solid var(--fg); outline-offset: -2px; border-radius: 4px; }
+  .tab[aria-current="page"] { color: var(--fg); font-weight: 600; border-bottom-color: var(--fg); }
+  .pg { max-width: 72rem; margin: 0 auto; padding-block: 32px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 40px; }
+  .head { display: grid; gap: 10px; }
+  .eyebrow { margin: 0; font-size: 12px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+  h1 { margin: 0; font: 400 clamp(1.7rem, 4vw, 2.4rem)/1.15 var(--serif); text-wrap: balance; }
+  .lede { margin: 0; max-width: 66ch; font-size: 16px; line-height: 1.65; }
+  .lede b, .num { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .meta { margin: 0; font-size: 12.5px; color: var(--muted); }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 14px; }
+  .tile { display: grid; gap: 6px; align-content: start; min-width: 0; padding: 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+  .tile-label { font-size: 12.5px; color: var(--muted); }
+  .big { font: 400 2.3rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+  .big.fecha { font-size: 1.7rem; }
+  .chg { font-size: 12.5px; color: var(--muted); }
+  .chg b { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .up { color: var(--good); } .down { color: var(--bad); }
+  section { display: grid; gap: 12px; min-width: 0; }
+  h2 { margin: 0; font-size: 18px; font-weight: 600; text-wrap: balance; }
+  .note { margin: 0; max-width: 66ch; font-size: 12.5px; color: var(--muted); }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12.5px; color: var(--muted); }
+  .key { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 12px; height: 12px; border-radius: 2px; }
+  .barras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; padding-top: 4px; }
+  .barras .area { height: 240px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 6px; border-bottom: 1px solid #c9c7c0; }
+  .barras.chica .area { height: 180px; }
+  .barras .val { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .barras .val.cero { color: var(--muted); font-weight: 500; }
+  .barras .pila { width: min(72%, 96px); display: flex; flex-direction: column; border-radius: 3px 3px 0 0; overflow: hidden; }
+  .barras .seg { width: 100%; }
+  .barras .parcial .seg { opacity: .5; }
+  .anio { display: block; padding-top: 6px; text-align: center; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .col { min-width: 0; }
+  .duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 28px; }
+  figure { margin: 0; display: grid; gap: 8px; min-width: 0; }
+  figcaption { font-size: 12.5px; color: var(--muted); }
+  .hbar { display: grid; gap: 8px; }
+  .hrow { display: grid; grid-template-columns: minmax(6.5rem, 9rem) 1fr; gap: 12px; align-items: center; }
+  .hname { font-size: 13.5px; }
+  .htrack { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .hfill { height: 18px; border-radius: 0 3px 3px 0; min-width: 2px; }
+  .hval { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .scroll { overflow-x: auto; min-width: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+  th { padding: 6px 10px; text-align: right; vertical-align: bottom; white-space: nowrap; font-size: 12px; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--line); }
+  td { padding: 7px 10px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child, .txt { text-align: left; }
+  .grp { border-left: 1px solid var(--line); }
+  .tot { font-weight: 600; }
+  .foot { margin: 0; font-size: 12px; color: var(--muted); }
+  details { padding-top: 16px; border-top: 1px solid var(--line); }
+  summary { cursor: pointer; font-weight: 600; }
+  summary:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+  .det { display: grid; gap: 16px; padding-top: 14px; }
+  .lista { margin: 0; padding-left: 1.2rem; display: grid; gap: 6px; max-width: 70ch; }
+  @media (max-width: 480px) { .barras .val { font-size: 11.5px; } .barras .area { height: 200px; } .barras.chica .area { height: 160px; } }
+
+  :root { --intl: #1e8a5a; }
+  .c-intl { background: var(--intl); }
+</style>
+</head>
+<body>
+<nav class="tabs" aria-label="Marcas">
+  <div class="tabs-in">
+    <a class="tab" href="index.html">Starbucks México</a>
+    <a class="tab" href="starbucks-internacional.html" aria-current="page">Starbucks Internacional</a>
+    <a class="tab" href="italiannis.html">Italianni's</a>
+    <a class="tab" href="cheesecake-factory.html">Cheesecake Factory</a>
+    <a class="tab" href="chilis.html">Chili's</a>
+  </div>
+</nav>
+<main class="pg">
+  <header class="head" id="resumen">
+    <p class="eyebrow">Análisis para Dirección · DEVIART · Ventas a ALSEA por marca</p>
+    <h1>Ventas de vasos a Starbucks Internacional</h1>
+    <p class="lede">Starbucks Internacional compró vasos solo entre septiembre y noviembre de 2025: <b>13</b> facturas a <b>8</b> países por <b>US$138,505</b> (3,069 cajas). Chile, Guatemala y Perú suman el <b>66%</b>. En 2026 no hay facturas.</p>
+    <p class="meta">Importes en dólares, sin IVA · Datos al 11 de noviembre de 2026</p>
+  </header>
+  <div class="tiles" id="indicadores">
+    <div class="tile"><span class="tile-label">Ventas · 2025</span><span class="big">US$138,505</span><span class="chg">3,069 cajas</span></div>
+    <div class="tile"><span class="tile-label">Países</span><span class="big">8</span><span class="chg">13 facturas</span></div>
+    <div class="tile"><span class="tile-label">Última factura</span><span class="big fecha">24 nov 2025</span><span class="chg">sin facturas en 2026</span></div>
+  </div>
+
+  <section id="ventas-por-pais">
+    <h2>Ventas por país, en dólares</h2>
+    <p class="note">Facturas en USD y sin IVA (exportación); no se suman con las ventas en pesos.</p>
+    <div class="hbar" role="img" aria-label="Ventas por país en dólares">
+      <div class="hrow" title="Chile: US$31,570, 699 cajas"><span class="hname">Chile</span><span class="htrack"><span class="hfill c-intl" style="width:82.00%"></span><span class="hval">US$31,570</span></span></div>
+      <div class="hrow" title="Guatemala: US$29,895, 663 cajas"><span class="hname">Guatemala</span><span class="htrack"><span class="hfill c-intl" style="width:77.65%"></span><span class="hval">US$29,895</span></span></div>
+      <div class="hrow" title="Perú: US$29,497, 654 cajas"><span class="hname">Perú</span><span class="htrack"><span class="hfill c-intl" style="width:76.61%"></span><span class="hval">US$29,497</span></span></div>
+      <div class="hrow" title="Argentina: US$24,118, 534 cajas"><span class="hname">Argentina</span><span class="htrack"><span class="hfill c-intl" style="width:62.65%"></span><span class="hval">US$24,118</span></span></div>
+      <div class="hrow" title="Colombia: US$12,101, 268 cajas"><span class="hname">Colombia</span><span class="htrack"><span class="hfill c-intl" style="width:31.43%"></span><span class="hval">US$12,101</span></span></div>
+      <div class="hrow" title="Costa Rica: US$8,252, 183 cajas"><span class="hname">Costa Rica</span><span class="htrack"><span class="hfill c-intl" style="width:21.43%"></span><span class="hval">US$8,252</span></span></div>
+      <div class="hrow" title="Uruguay: US$2,710, 60 cajas"><span class="hname">Uruguay</span><span class="htrack"><span class="hfill c-intl" style="width:7.04%"></span><span class="hval">US$2,710</span></span></div>
+      <div class="hrow" title="Paraguay: US$361, 8 cajas"><span class="hname">Paraguay</span><span class="htrack"><span class="hfill c-intl" style="width:0.94%"></span><span class="hval">US$361</span></span></div>
+    </div>
+  </section>
+
+  <section id="comparativo-anual">
+    <h2>Detalle por país</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>País</th><th>Facturas</th><th>Cajas</th><th>Piezas</th><th>Ventas</th><th>% del total</th></tr></thead>
+        <tbody>
+            <tr><td>Chile</td><td>3</td><td>699</td><td>35,076</td><td class="tot">US$31,570</td><td>22.8%</td></tr>
+            <tr><td>Guatemala</td><td>1</td><td>663</td><td>34,120</td><td class="tot">US$29,895</td><td>21.6%</td></tr>
+            <tr><td>Perú</td><td>1</td><td>654</td><td>33,528</td><td class="tot">US$29,497</td><td>21.3%</td></tr>
+            <tr><td>Argentina</td><td>2</td><td>534</td><td>26,788</td><td class="tot">US$24,118</td><td>17.4%</td></tr>
+            <tr><td>Colombia</td><td>2</td><td>268</td><td>13,508</td><td class="tot">US$12,101</td><td>8.7%</td></tr>
+            <tr><td>Costa Rica</td><td>1</td><td>183</td><td>9,404</td><td class="tot">US$8,252</td><td>6.0%</td></tr>
+            <tr><td>Uruguay</td><td>2</td><td>60</td><td>3,004</td><td class="tot">US$2,710</td><td>2.0%</td></tr>
+            <tr><td>Paraguay</td><td>1</td><td>8</td><td>400</td><td class="tot">US$361</td><td>0.3%</td></tr>
+            <tr><td class="tot">Total</td><td class="tot">13</td><td class="tot">3,069</td><td class="tot">155,828</td><td class="tot">US$138,505</td><td class="tot">100.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="por-tamano">
+    <h2>Por tamaño de vaso</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th class="txt">Producto</th><th>Piezas<br>por caja</th><th>Cajas</th><th>Piezas</th><th>Ventas</th><th>Precio promedio<br>por caja</th></tr></thead>
+        <tbody>
+            <tr><td class="txt">Vaso 16 oz</td><td>52</td><td>2,129</td><td>110,708</td><td>US$95,933</td><td>US$45.06</td></tr>
+            <tr><td class="txt">Vaso 24 oz</td><td>48</td><td>940</td><td>45,120</td><td>US$42,573</td><td>US$45.29</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <details id="notas">
+    <summary>Qué incluye y detalle por producto</summary>
+    <div class="det">
+      <ul class="lista">
+        <li>Vasos facturados a las operaciones de Starbucks fuera de México (un país por factura), en dólares y sin IVA.</li>
+        <li>Se agrupan por tamaño: 16 oz en caja de 52 piezas y 24 oz en caja de 48 (incluye vasos Universo, Cold Cup y tumblers).</li>
+        <li>Fuente: reporte de facturación GENERAL ALSEA de Administración, 13 facturas del 3 de septiembre de 2025 al 24 de noviembre de 2025.</li>
+      </ul>
+
+    </div>
+  </details>
+</main>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ventas Cheesecake Factory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+  /* Ventas ALSEA por marca: hoja blanca, pestañas fijas arriba, columna de 72rem, cifras tabulares. */
+  :root {
+    --bg: #ffffff; --fg: #1f1e1d; --muted: #6d6b67; --line: #e4e2dc; --panel: #fafaf8;
+    --good: #006300; --bad: #8e2626;
+    --sans: Inter, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); }
+  body { font: 15px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+  .tabs { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .tabs-in { max-width: 72rem; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+  .tabs-in::-webkit-scrollbar { display: none; }
+  .tab { flex: 0 0 auto; padding: 14px 12px 12px; font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+  .tab:hover { color: var(--fg); }
+  .tab:focus-visible { outline: 2px solid var(--fg); outline-offset: -2px; border-radius: 4px; }
+  .tab[aria-current="page"] { color: var(--fg); font-weight: 600; border-bottom-color: var(--fg); }
+  .pg { max-width: 72rem; margin: 0 auto; padding-block: 32px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 40px; }
+  .head { display: grid; gap: 10px; }
+  .eyebrow { margin: 0; font-size: 12px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+  h1 { margin: 0; font: 400 clamp(1.7rem, 4vw, 2.4rem)/1.15 var(--serif); text-wrap: balance; }
+  .lede { margin: 0; max-width: 66ch; font-size: 16px; line-height: 1.65; }
+  .lede b, .num { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .meta { margin: 0; font-size: 12.5px; color: var(--muted); }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 14px; }
+  .tile { display: grid; gap: 6px; align-content: start; min-width: 0; padding: 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+  .tile-label { font-size: 12.5px; color: var(--muted); }
+  .big { font: 400 2.3rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+  .big.fecha { font-size: 1.7rem; }
+  .chg { font-size: 12.5px; color: var(--muted); }
+  .chg b { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .up { color: var(--good); } .down { color: var(--bad); }
+  section { display: grid; gap: 12px; min-width: 0; }
+  h2 { margin: 0; font-size: 18px; font-weight: 600; text-wrap: balance; }
+  .note { margin: 0; max-width: 66ch; font-size: 12.5px; color: var(--muted); }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12.5px; color: var(--muted); }
+  .key { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 12px; height: 12px; border-radius: 2px; }
+  .barras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; padding-top: 4px; }
+  .barras .area { height: 240px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 6px; border-bottom: 1px solid #c9c7c0; }
+  .barras.chica .area { height: 180px; }
+  .barras .val { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .barras .val.cero { color: var(--muted); font-weight: 500; }
+  .barras .pila { width: min(72%, 96px); display: flex; flex-direction: column; border-radius: 3px 3px 0 0; overflow: hidden; }
+  .barras .seg { width: 100%; }
+  .barras .parcial .seg { opacity: .5; }
+  .anio { display: block; padding-top: 6px; text-align: center; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .col { min-width: 0; }
+  .duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 28px; }
+  figure { margin: 0; display: grid; gap: 8px; min-width: 0; }
+  figcaption { font-size: 12.5px; color: var(--muted); }
+  .hbar { display: grid; gap: 8px; }
+  .hrow { display: grid; grid-template-columns: minmax(6.5rem, 9rem) 1fr; gap: 12px; align-items: center; }
+  .hname { font-size: 13.5px; }
+  .htrack { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .hfill { height: 18px; border-radius: 0 3px 3px 0; min-width: 2px; }
+  .hval { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .scroll { overflow-x: auto; min-width: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+  th { padding: 6px 10px; text-align: right; vertical-align: bottom; white-space: nowrap; font-size: 12px; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--line); }
+  td { padding: 7px 10px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child, .txt { text-align: left; }
+  .grp { border-left: 1px solid var(--line); }
+  .tot { font-weight: 600; }
+  .foot { margin: 0; font-size: 12px; color: var(--muted); }
+  details { padding-top: 16px; border-top: 1px solid var(--line); }
+  summary { cursor: pointer; font-weight: 600; }
+  summary:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+  .det { display: grid; gap: 16px; padding-top: 14px; }
+  .lista { margin: 0; padding-left: 1.2rem; display: grid; gap: 6px; max-width: 70ch; }
+  @media (max-width: 480px) { .barras .val { font-size: 11.5px; } .barras .area { height: 200px; } .barras.chica .area { height: 160px; } }
+
+  :root { --ccf: #7a4fb8; }
+  .c-ccf { background: var(--ccf); }
+</style>
+</head>
+<body>
+<nav class="tabs" aria-label="Marcas">
+  <div class="tabs-in">
+    <a class="tab" href="index.html">Starbucks México</a>
+    <a class="tab" href="starbucks-internacional.html">Starbucks Internacional</a>
+    <a class="tab" href="italiannis.html">Italianni's</a>
+    <a class="tab" href="cheesecake-factory.html" aria-current="page">Cheesecake Factory</a>
+    <a class="tab" href="chilis.html">Chili's</a>
+  </div>
+</nav>
+<main class="pg">
+  <header class="head" id="resumen">
+    <p class="eyebrow">Análisis para Dirección · DEVIART · Ventas a ALSEA por marca</p>
+    <h1>Ventas de vasos a Cheesecake Factory, 2023 a 2026</h1>
+    <p class="lede">De enero a octubre de 2026 vendimos <b>$411,125</b> en vasos a Cheesecake Factory, <b class="up">+155%</b> frente al mismo periodo de 2025 (<b>$161,161</b>). Las compras crecen cada año desde que empezaron en 2024: <b>30</b> cajas en 2024, <b>61</b> en 2025 y <b>125</b> en lo que va de 2026.</p>
+    <p class="meta">Importes sin IVA, en pesos · Datos al 11 de noviembre de 2026</p>
+  </header>
+  <div class="tiles" id="indicadores">
+    <div class="tile"><span class="tile-label">Ventas · enero a octubre 2026</span><span class="big">$411,125</span><span class="chg"><b class="up">+155%</b> vs. enero a octubre 2025</span></div>
+    <div class="tile"><span class="tile-label">Ventas · año 2025 completo</span><span class="big">$200,629</span><span class="chg"><b class="up">+103%</b> vs. 2024</span></div>
+    <div class="tile"><span class="tile-label">Última factura</span><span class="big fecha">22 oct 2026</span><span class="chg">17 facturas desde 2024</span></div>
+  </div>
+
+  <section id="ventas-por-anio">
+    <h2>Ventas por año, sin IVA</h2>
+    <p class="note">Años completos. 2026 va al 11 de noviembre de 2026, fecha de corte; por eso su barra va más clara.</p>
+    
+    <div class="barras" role="img" aria-label="Ventas sin IVA por año. 2023: $0; 2024: $98,670; 2025: $200,629; 2026: $411,125">
+      <div class="col" title="2023: $0">
+        <div class="area"><span class="val cero">$0</span><div class="pila" style="height:0.00%"><div class="seg c-ccf" style="height:0.00%"></div></div></div>
+        <span class="anio">2023</span>
+      </div>
+      <div class="col" title="2024: $98,670">
+        <div class="area"><span class="val">$99 mil</span><div class="pila" style="height:24.00%"><div class="seg c-ccf" style="height:100.00%"></div></div></div>
+        <span class="anio">2024</span>
+      </div>
+      <div class="col" title="2025: $200,629">
+        <div class="area"><span class="val">$201 mil</span><div class="pila" style="height:48.80%"><div class="seg c-ccf" style="height:100.00%"></div></div></div>
+        <span class="anio">2025</span>
+      </div>
+      <div class="col parcial" title="2026: $411,125">
+        <div class="area"><span class="val">$411 mil</span><div class="pila" style="height:100.00%"><div class="seg c-ccf" style="height:100.00%"></div></div></div>
+        <span class="anio">2026*</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="cajas-por-anio">
+    <h2>Cajas vendidas por año</h2>
+    <p class="note">Caja de 253 piezas.</p>
+      <div class="barras chica" role="img" aria-label="Cajas de Vaso reusable con tapa y popote por año. 2023: 0; 2024: 30; 2025: 61; 2026: 125">
+        <div class="col" title="2023: 0 cajas">
+          <div class="area"><span class="val cero">0</span><div class="pila" style="height:0.00%"><div class="seg c-ccf" style="height:100%"></div></div></div>
+          <span class="anio">2023</span>
+        </div>
+        <div class="col" title="2024: 30 cajas">
+          <div class="area"><span class="val">30</span><div class="pila" style="height:24.00%"><div class="seg c-ccf" style="height:100%"></div></div></div>
+          <span class="anio">2024</span>
+        </div>
+        <div class="col" title="2025: 61 cajas">
+          <div class="area"><span class="val">61</span><div class="pila" style="height:48.80%"><div class="seg c-ccf" style="height:100%"></div></div></div>
+          <span class="anio">2025</span>
+        </div>
+        <div class="col parcial" title="2026: 125 cajas">
+          <div class="area"><span class="val">125</span><div class="pila" style="height:100.00%"><div class="seg c-ccf" style="height:100%"></div></div></div>
+          <span class="anio">2026*</span>
+        </div>
+      </div>
+  </section>
+
+  <section id="comparativo-anual">
+    <h2>Comparativo anual</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Año</th><th class="grp">Total<br>cajas</th><th>Total<br>ventas</th></tr></thead>
+          <tbody>
+            <tr><td>2023</td><td class="grp tot">0</td><td class="tot">$0</td></tr>
+            <tr><td>2024</td><td class="grp tot">30</td><td class="tot">$98,670</td></tr>
+            <tr><td>2025</td><td class="grp tot">61</td><td class="tot">$200,629</td></tr>
+            <tr><td>2026*</td><td class="grp tot">125</td><td class="tot">$411,125</td></tr>
+          </tbody>
+        </table>
+      </div>
+    <p class="foot">* 2026 al 11 de noviembre de 2026. Ventas sin IVA, en pesos.</p>
+  </section>
+
+  <section id="enero-octubre">
+    <h2>Mismo periodo: enero a octubre de cada año</h2>
+    <p class="note">Compara 2026 con los años anteriores sin el efecto de noviembre y diciembre.</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Año</th><th class="grp">Total<br>cajas</th><th>Total<br>ventas</th><th class="grp">Ventas vs.<br>año anterior</th></tr></thead>
+          <tbody>
+            <tr><td>2023</td><td class="grp tot">0</td><td class="tot">$0</td><td class="grp ">—</td></tr>
+            <tr><td>2024</td><td class="grp tot">0</td><td class="tot">$0</td><td class="grp ">—</td></tr>
+            <tr><td>2025</td><td class="grp tot">49</td><td class="tot">$161,161</td><td class="grp ">—</td></tr>
+            <tr><td>2026</td><td class="grp tot">125</td><td class="tot">$411,125</td><td class="grp up">+155%</td></tr>
+          </tbody>
+        </table>
+      </div>
+  </section>
+
+  <details id="notas">
+    <summary>Qué incluye y detalle por producto</summary>
+    <div class="det">
+      <ul class="lista">
+        <li>Solo vasos vendidos a Distribuidora e Importadora Alsea para Cheesecake Factory.</li>
+        <li>Un solo producto: vaso reusable con tapa y popote, en caja de 253 piezas.</li>
+        <li>Importes sin IVA, como se facturaron, antes de las notas de crédito que aplica ALSEA.</li>
+        <li>Fuente: reporte de facturación GENERAL ALSEA de Administración, 17 facturas del 14 de noviembre de 2024 al 22 de octubre de 2026.</li>
+      </ul>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Año</th><th class="txt">Producto</th><th>Piezas<br>por caja</th><th>Cajas</th><th>Piezas</th><th>Ventas</th><th>Precio promedio<br>por caja</th></tr></thead>
+          <tbody>
+            <tr><td>2024</td><td class="txt">Vaso reusable con tapa y popote</td><td>253</td><td>30</td><td>7,590</td><td>$98,670</td><td>$3,289.00</td></tr>
+            <tr><td>2025</td><td class="txt">Vaso reusable con tapa y popote</td><td>253</td><td>61</td><td>15,433</td><td>$200,629</td><td>$3,289.00</td></tr>
+            <tr><td>2026</td><td class="txt">Vaso reusable con tapa y popote</td><td>253</td><td>125</td><td>31,625</td><td>$411,125</td><td>$3,289.00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+</main>
+</body>
+</html>
